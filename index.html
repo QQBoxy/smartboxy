@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Smart Boxy</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Smart Boxy</h1>
+        Light: <el-switch v-model="power" v-on:change="light" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                power: false
+            },
+            methods: {
+                light: (value) => {
+                    $.ajax({
+                        type: "get",
+                        data: {
+                            power: value ? 'on' : 'off'
+                        },
+                        url: '/light'
+                    }).done(() => {
+                        
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
